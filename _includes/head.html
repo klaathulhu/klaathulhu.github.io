@@ -3,6 +3,20 @@
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- OG data -->
+    <meta property="og:title" content="Title för statisk site, 60-90 tecken" />
+    <meta property="og:url" content="http://localhost:4000" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="En beskrivning av sidan på ungefär 200 tecken" />
+    <meta property="og:image" content="./assets/img/snygg_bild.jpg" />
+
+    <!-- Twitter data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Titel på sidan här" />
+    <meta name="twitter:description" content="200 tecken lång beskrivning här" />
+    <meta name="twitter:url" content="http://localhost:4000" />
+    <meta name="twitter:image" content="./assets/img/spiffy_bild.jgp" />
+
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{{ site.description }}">
 

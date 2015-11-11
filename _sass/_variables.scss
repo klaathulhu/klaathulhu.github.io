@@ -1,13 +1,14 @@
 
 @charset "utf-8";
-
+@import url(https://fonts.googleapis.com/css?family=Roboto|Merriweather);
 @import "normalize";
 
 // Our variables
-$base-font-family: Helvetica, Arial, sans-serif;
+$base-font-family: Roboto, Helvetica, sans-serif;
 $base-font-size:   16px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
+$header-font-family: Merriweather, Helvetica, sans-serif;
 
 $spacing-unit:     30px;
 

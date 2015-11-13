@@ -35,9 +35,17 @@
         color: $text-color;
         line-height: $base-line-height;
 
+        &:hover {
+            /*color: $text-color; */
+            color: $link-hover;
+            text-decoration: none;
+            transition: 0.5s;
+        }
         // Gaps between nav items, but not on the first one
         &:not(:first-child) {
             margin-left: 20px;
+
+
         }
     }
 

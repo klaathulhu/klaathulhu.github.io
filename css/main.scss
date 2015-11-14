@@ -4,6 +4,10 @@
 @import "../_sass/_variables";
 @import "../_sass/normalize";
 @import "../_sass/header";
+@import "base",
+"layout",
+"syntax-highlighting";
+
 /*
 @charset "utf-8";
 
@@ -43,7 +47,7 @@ $on-laptop:        800px;
     }
 }
 
-
+*/
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
@@ -51,4 +55,3 @@ $on-laptop:        800px;
         "layout",
         "syntax-highlighting"
 ;
-*/

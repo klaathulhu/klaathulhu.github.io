@@ -6,14 +6,16 @@
     border-bottom: 1px solid $grey-color-light;
     min-height: 56px;
     font-family: $font-nav-link;
-
+    background-color: $background-color;
     // Positioning context for the mobile navigation icon
     position: relative;
     & a {
         text-transform: uppercase;
     }
 }
-
+.site-header > .wrapper {
+    background-color: $background-color;
+}
 .site-title {
     font-size: 26px;
     line-height: 56px;
@@ -91,7 +93,7 @@
             display: none;
         }
 
-        &:hover .trigger {
+        &:active .trigger {
             display: block;
             padding-bottom: 5px;
         }
@@ -110,6 +112,8 @@
  */
 .site-footer {
     border-top: 1px solid $grey-color-light;
+    background-color: $dark-grey;
+    color: orange;
     padding: $spacing-unit 0;
 }
 
@@ -180,10 +184,14 @@
  */
 .page-content {
     padding: $spacing-unit 0;
-}
+    background-color: $background-color;
 
+}
+.page-content p {
+    font-size: $small-font-size;
+}
 .page-heading {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .post-list {
@@ -191,7 +199,10 @@
     list-style: none;
 
     > li {
+        border-radius: 5px;
+        padding: $spacing-unit;
         margin-bottom: $spacing-unit;
+        border-bottom:1px solid $grey-color-light;
     }
 }
 
@@ -200,9 +211,16 @@
     color: $grey-color;
 }
 
-.post-link {
+a.post-link {
     display: block;
-    font-size: 24px;
+    font-size: 20px;
+    color: $dark-grey;
+    &:visited {
+        @extend a.post-link;
+    }
+    &:hover {
+        color: $link-hover;
+    }
 }
 
 
@@ -250,4 +268,9 @@
             font-size: 18px;
         }
     }
+}
+.pagination {
+    display: block;
+    background-color: rgb(245,247,248);
+    text-align: right;
 }

@@ -2,7 +2,9 @@
 layout: post
 ---
 
-# This is a header
+Här kan jag testa olika taggar för markdown
+
+This is a header
 
 This should be a paragraph
 

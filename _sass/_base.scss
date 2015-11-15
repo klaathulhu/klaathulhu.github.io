@@ -19,7 +19,8 @@ body {
     line-height: $base-line-height;
     font-weight: 300;
     color: $text-color;
-    background-color: $background-color;
+    /*background-color: $background-color; */
+    background-color: $dark-grey;
     -webkit-text-size-adjust: 100%;
 }
 
@@ -101,7 +102,7 @@ a {
 
     &:hover {
         /*color: $text-color; */
-        color: $link-h;
+        color: $link-hover;
         text-decoration: none;
         transition: 1s;
     }
@@ -165,6 +166,7 @@ pre {
     margin-left: auto;
     padding-right: $spacing-unit;
     padding-left: $spacing-unit;
+
     @extend %clearfix;
 
     @include media-query($on-laptop) {
@@ -174,6 +176,8 @@ pre {
         padding-left: $spacing-unit / 2;
     }
 }
+
+
 
 
 

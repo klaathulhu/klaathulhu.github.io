@@ -1,20 +1,23 @@
 <header class="site-header">
-  <svg version="1.1" id="Lager_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-       viewBox="0 0 398.5 88.1" style="enable-background:new 0 0 398.5 88.1;" xml:space="default">
-<style type="text/css">
-	.st0{fill:#1D1D1B;stroke:#FFFFFF;stroke-miterlimit:10;}
-    .st1{fill:#FFFFFF;}
-    .st2{font-family: "ff-tisa-sans-web-pro", "Roboto", Helvetica, sans-serif;}
-    .st3{font-size:72px;}
-    .st4{fill:#1D1D1B;}
-</style>
 
- <circle class="st0" cx="44" cy="44" r="44"/>
-<text transform="matrix(1 0 0 1 19.1282 71.5257)"><tspan x="0" y="0" class="st1 st2 st3">K </tspan><tspan x="68" y="0" class="st4 st2 st3">laathulhu</tspan></text>
-</svg>
 
   <div class="wrapper">
 
+    <svg version="1.1" id="Lager_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-280 236.9 398.5 88.1" style="enable-background:new -280 236.9 398.5 88.1;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#1D1D1B;stroke:#FFFFFF;stroke-miterlimit:10;}
+    .st1{enable-background:new    ;}
+    .st2{fill:#FFFFFF;}
+    .st3{font-family:'TisaSansPro';}
+    .st4{font-size:72px;}
+    .st5{font-family:'Helvetica';}
+    .st6{fill:#1D1D1B;}
+</style>
+<circle class="st0" cx="-236" cy="280.9" r="44"/>
+<text transform="matrix(1 0 0 1 -260.8718 308.4257)" class="st1"><tspan x="0" y="0" class="st2 st3 st4">K</tspan><tspan x="45.9" y="0" class="st2 st5 st4"> </tspan></text>
+<text transform="matrix(1 0 0 1 -192.8718 308.4257)" class="st6 st3 st4">laathulhu</text>
+</svg>
     <!-- viewBox="0 0 518.1 114.5" -->
    <!-- <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a> -->
     <nav class="site-nav">
@@ -29,10 +32,11 @@
       </a>
 
       <div class="trigger">
-        {% for page in site.pages %}
-          {% if page.title %}
         <a class="page-link" href="{{ site.baseurl }}/">Start
         </a>
+        {% for page in site.pages %}
+          {% if page.title %}
+
           <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
           {% endif %}
         {% endfor %}

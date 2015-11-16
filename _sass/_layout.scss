@@ -93,7 +93,7 @@
             display: none;
         }
 
-        &:active .trigger {
+        &:focus .trigger {
             display: block;
             padding-bottom: 5px;
         }

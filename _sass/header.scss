@@ -21,13 +21,7 @@
 #Lager_1 {
   font-family: $title-font-family;
   @include media-query($on-palm) {
-    flex: 0 1 auto;
-    order: 1;
-
-
-    .st6 {
-      display: none;
-    }
+    display: none;
   }
 }
 

@@ -12,6 +12,8 @@ comments: true
 
   <article class="post-content">
     {{ content }}
+
+    {% include social.html %}
     {% if page.comments %}
     <div id="disqus_thread"></div>
     <script>

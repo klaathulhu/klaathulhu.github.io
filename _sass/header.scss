@@ -20,5 +20,66 @@
 
 #Lager_1 {
   font-family: $title-font-family;
+  @include media-query($on-palm) {
+    flex: 0 1 auto;
+    order: 1;
+
+
+    .st6 {
+      display: none;
+    }
+  }
+}
+
+#mobile-icon {
+  display: none;
+  @include media-query($on-palm) {
+    display: block;
+    position: relative;
+   /* left: 50px; */
+    top: 5px;
+    left: 50px;
+    height: 120%;
+    padding-left: 12px;
+    border-left: 1px solid $grey-color-light;
+
+    > img {
+      height: 100%;
+    }
+
+  }
+}
+#mobile-mail {
+  display: none;
+  @include media-query($on-palm) {
+    display: block;
+    position: absolute;
+    right: 1px;
+    height: 100%;
+    font-size: 42px;
+    margin-top: -5px;
+    color: $grey-color-dark;
+
+      &:hover {
+        color: $link-hover;
+      }
+    }
+  }
+
+#mobile-icon2 {
+  @include media-query($on-palm) {
+
+
+   /* position: relative;
+    left: 50px;
+    top: 5px; */
+    height: $mobile-menu-height;
+    padding: 10px;
+    flex: 0 1 auto;
+    order: 2;
+    background-image: url("../assets/img/klaathulhu3.svg");
+    background-repeat: no-repeat;
+
+  }
 }
 

@@ -60,10 +60,12 @@
     }
 
     @include media-query($on-palm) {
-        /* position: absolute; */
-        float: left;
+        position: absolute;
+        /* float: left; */
         top: 9px;
-        right: 30px;
+        left: 10px;
+      /*  flex: 0 1 auto;
+        order: 1; */
         background-color: $background-color;
         border: 1px solid $grey-color-light;
         border-radius: 5px;
@@ -92,10 +94,14 @@
             clear: both;
             display: none;
         }
+        &:hover {
 
-        &:focus .trigger {
-            display: block;
+            z-index: 1;
+        }
+        &:hover .trigger {
+            display: table;
             padding-bottom: 5px;
+
         }
 
         .page-link {
@@ -104,6 +110,7 @@
         }
     }
 }
+
 
 
 
@@ -133,6 +140,12 @@
     color: $grey-color;
     margin-left: -$spacing-unit / 2;
     @extend %clearfix;
+    & a {
+        color: $grey-color;
+        &:hover {
+            color: $link-hover;
+        }
+    }
 }
 
 .footer-col {
@@ -155,6 +168,7 @@
     width: -webkit-calc(45% - (#{$spacing-unit} / 2));
     width:         calc(45% - (#{$spacing-unit} / 2));
 }
+
 
 @include media-query($on-laptop) {
     .footer-col-1,
@@ -272,5 +286,5 @@ a.post-link {
 .pagination {
     display: block;
     background-color: rgb(245,247,248);
-    text-align: right;
+    text-align: center;
 }

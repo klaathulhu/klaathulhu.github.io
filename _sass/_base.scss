@@ -176,14 +176,22 @@ pre {
         padding-left: $spacing-unit / 2;
     }
 }
+.site-header > .wrapper {
+    @include media-query($on-palm) {
+        display: flex;
+        flex-flow: row nowrap;
+        height: 36px;
+    }
+}
 
 
 
 
 
-/**
- * Clearfix
- */
+
+    /**
+     * Clearfix
+     */
 %clearfix {
 
     &:after {

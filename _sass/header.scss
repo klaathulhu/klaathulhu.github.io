@@ -24,10 +24,12 @@
     display: none;
   }
 }
-.wf-loading  {
+.wf-loading  svg{
     visibility: hidden;
 }
-
+.wf-active, .wf-inactive {
+    visibility: visible;
+}
 #mobile-icon {
   display: none;
   @include media-query($on-palm) {

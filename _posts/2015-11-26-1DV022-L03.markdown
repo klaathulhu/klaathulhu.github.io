@@ -1,0 +1,314 @@
+---
+layout: post
+excerpt: Föreläsning 3
+category: 1dv022
+---
+
+Use Selectors API:
+
+
+{% highlight javascript %}
+
+querySelector // returns node element
+querySelectorAll // returns node-list
+
+var mainDiv = document.querySelector("#main");
+
+var pTags = document.querySelectorAll("p");
+
+var tags = document.querySelectorAll("p.tag");
+
+{% endhighlight %}
+
+
+Different ways to reach a node list
+
+{% highlight javascript %}
+// Extend nodelist (anti pattern) easy, but bad to use
+NodeList.prototype.forEach = Array.prototype.forEach;
+
+// Borrowing methods
+Array.prototype.forEach.call(nodes, function(node){...});
+
+// Transform (copy) node list to array;
+// practical when working a lot with a single node list
+nodes = Array.prototype.slice.call(nodes);
+
+{% endhighlight %}
+
+
+## Manipulation of the DOM
+
+{% highlight javascript %}
+// Adding nodes
+node.appendChild(newNode);
+
+node.insertBefore(newNode, beforeNode);
+
+// Replacing nodes
+node.replaceChild(newNode, oldNode);
+
+// Removing nodes
+node.removeChild(oldNode);
+
+// Making clones
+// set bool to true to make a deep copy i.e. child nodes are also copied
+node.cloneNode(bool);
+
+{% endhighlight %}
+
+## Creating nodes
+
+{% highlight javascript %}
+// create new element node
+var newTag = document.createElement("p");
+
+// create new text node
+var newText = document.createTextNode("Text");
+
+// append text to newTag
+newTag.appendChild(newText);
+
+// appends newTag to #main, adds elements to DOM and may trigger redraw
+document.querySelector("#main").appendChild(newTag);
+{% endhighlight %}
+
+Försök att separera inläsning av DOM-träd och ändringar av DOM-trädet för att förbättre prestandan.
+
+Använd inte innerHTML på kursen. Öppnar för kodinjektion.
+
+Använd istället textContent. Skapar en ny TEXT_NODE och tar bort alla children från element
+
+{% highlight javascript %}
+element.textContent = "Text...";
+{% endhighlight %}
+
+## Attributes
+
+{% highlight javascript %}
+// getAttribute("attribute name");
+
+// setAttribute("attribute name", value);
+
+// removeAttribute("attribute name");
+
+var newTag = document.createElement("img");
+
+// after setting src and linking image, the browser will make an async call to
+// fetch and cache the image
+newTag.setAttribute("src", "image/picture.svg");
+
+document.querySelector("#main").appendChild(newTag);
+{% endhighlight %}
+
+## Templates
+
+Ett sätt att komma runt situationer där man behöver skapa väldigt mycket HTML
+med hjälp av JS.
+
+Exempel:
+
+{% highlight HTML %}
+// 1. Template kan läggas i <head> eller <body>
+// 2. Det i <template> kommer att ignoreras av renderingsmotorn.
+<template id="post-template">
+    <p class="post">
+        <ul>
+            <li class="active">
+                <a href="#">The first link</a>
+            </li>
+            <li>
+                <a href="#">The second link</a>
+            </li>
+        </ul>
+    </p>
+</template>
+{% endhighlight %}
+{% highlight javascript %}
+// hämta template med selector
+var template = document.querySelector("#post-template");
+// hämta content från template och importera referens till dokumentet
+// true == deep copy
+var clone = document.importNode(template.content, true);
+// appenda till body, uppdatera DOM och repaint
+document.querySelector("body").appendChild(clone);
+{% endhighlight %}
+
+##Event
+
+Anti-pattern:
+{% highlight HTML %}
+<a href="page.html" onclick="doSomething();">The link</a>
+{% endhighlight %}
+
+###Add event listeners
+
+"When this happens, do that"
+{% highlight javascript %}
+var a = document.querySelector("#theatag");
+
+a.addEventListener("click", buttonClicked);
+
+function buttonClicked(event) {
+console.log("You clicked the link");
+};
+{% endhighlight %}
+
+eller
+
+{% highlight javascript %}
+var a = document.querySelector("#theatag");
+
+a.addEventListener("click", function(event){
+    console.log("You clicked the link");
+});
+{% endhighlight %}
+
+###Remove event listener
+
+{% highlight javascript %}
+var a = document.querySelector("#theatag");
+
+// note the named function expression
+a.addEventListener("click", function buttonClicked(event) {
+    console.log("You can only click me once");
+
+    // both event and reference must be specified
+    a.removeEventListener("click", buttonClicked);
+};
+{% endhighlight %}
+
+Capture/bubble:
+
+Webläsaren söker efter event genom hela trädet, tills det når den targetade tagen (capture)
+och fortsätter leta hela vägen tillbaka till start (bubble).
+
+{% highlight javascript %}
+// fortsätt inte leta efter första träff vid bubble
+event.stopPropagation();
+{% endhighlight%}
+
+{% highlight javascript %}
+// "true" i slutet av addEventListener betyder "ta hand om event vid capture istf bubble"
+p.addEventListener("click", function(event) {
+    console.log("blaa");
+}, true);
+
+{% endhighlight %}
+
+###What triggered the event?
+
+Inside an event handler **this** will reference the element which triggered the event
+
+{% highlight javascript %}
+var a = document.querySelector("#atag");
+
+a.addEventListener("click", function(event) {
+    a === this; // true
+    a === event.target; // true
+    this === event.target; // true
+});
+{% endhighlight %}
+
+####Closures can cause headache
+{% highlight HTML %}
+<div id="links">
+    <a href="#">The first link</a>
+    <a href="#">The second link</a>
+    <a href="#">The third link</a>
+    <a href="#">The fourth link</a>
+</div>
+{% endhighlight %}
+
+{% highlight javascript %}
+var aTags = document.querySelectorAll("#links a");
+
+// The issue: when the function returns, i is set to 4
+for (var i = 0; i < aTags.length; i++) {
+    aTags[i].addEventListener("click", function(event){
+    console.log("Clicked link", i); //4
+    console.log(this.textContent); // correct
+    console.log(event.target.textContent); // Correct
+    });
+}
+{% endhighlight %}
+
+####Solution
+{% highlight javascript %}
+var aTags = document.querySelectorAll("#links a");
+
+// fixes the problem, however, it creates 2 anonymous functions for each
+// eventListener, which could use up a lot of RAM.
+Array.prototype.forEach.call(aTags, function(a){
+    a.addEventListener("click", function(event){
+        console.log(a.textContent); // correct
+        console.log(this.textContent); // correct
+        console.log(event.target.textContent); // Correct
+    });
+});
+{% endhighlight %}
+
+##Event delegation
+Add one listener instead of four
+
+{% highlight HTML %}
+<div id="links">
+    <a href="#">The first link</a>
+    <a href="#">The second link</a>
+    <a href="#">The third link</a>
+    <a href="#">The fourth link</a>
+</div>
+{% endhighlight %}
+{% highlight javascript %}
+var div = document.querySelectorAll("#links");
+
+// Instead of capturing events on each a tag, capture event when it bubbles up to the div
+div.addEventListener("click", function(event){
+    console.log(this.textContent); // "The first link", "The second.."
+
+    // event.target gives the current node
+    console.log(event.target.textContent); // "The first link"
+
+    this === div; // true
+    this === event.currentTarget; // true
+});
+{% endhighlight %}
+
+##.bind()
+
+Se mer vid behov
+
+##Stop the default action
+Gör vad det låter som.
+{% highlight javascript %}
+var a = document.querySelector("#atag");
+
+a.addEventListener("click", function(event){
+    console.log("Don't activate link")
+    event.preventDefault();
+});
+{% endhighlight %}
+Alternativt kan lyssnaren return false.
+
+
+##Timers
+
+Timeout:
+{% highlight javascript %}
+var timer = setTimeout(function(){
+    console.log("At least 3 seconds passed...");
+}, 3000);
+
+// later...
+clearTimeout(timer);
+{% endhighlight %}
+
+Interval:
+{% highlight javascript %}
+var timer = setInterval(function(){
+    console.log("At least 3 seconds passed...");
+}, 3000);
+
+// later..
+clearInterval(timer);
+{% endhighlight %}

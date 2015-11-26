@@ -1,5 +1,6 @@
 ---
 layout: post
+excerpt: Hur man sätter in en bild
 ---
 Så här köttar man in en bild:
 

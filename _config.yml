@@ -4,7 +4,7 @@ email: fw222ek@student.lnu.se
 description: > # this means to ignore newlines until "baseurl:"
   The landing page for software development student Klaathulhu
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "" # the base hostname & protocol for your site
+url: "http://klaathulhu.github.io" # the base hostname & protocol for your site
 twitter_username:
 github_username:  klaathulhu
 facebook_username: fredrik.wallstedt

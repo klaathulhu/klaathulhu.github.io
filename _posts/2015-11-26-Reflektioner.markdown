@@ -1,3 +1,8 @@
+---
+layout: post
+excerpt: Reflektioner kring examination 1
+---
+
 * What do you think of pre-compiling your CSS?
     * Compare to regular CSS
     * Which techniques did you use?

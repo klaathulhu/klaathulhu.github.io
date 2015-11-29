@@ -30,3 +30,5 @@ Det finns dock ingen garanti att blocken körs direkt efter varandra; andra bloc
 ###Asynkron programmering
 
 ![Asynchronous programming]({{ site.url }}/assets/img/async-programming.png)
+
+

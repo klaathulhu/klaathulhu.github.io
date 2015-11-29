@@ -1,0 +1,32 @@
+---
+layout: post
+excerpt: Anteckningar från lektion 4
+categories: 1dv022, javascript
+---
+
+När ett asynkront anrop görs skapar webbläsaren själv en ny tråd och gör anropen i bakgrunden. När processen avslutats, returneras
+ resultatet till kön och kan köras.
+
+{% highlight javascript%}
+function hello(){
+    console.log("When do I say hello?");
+}
+
+function run(){
+    setTimeout(hello, 0);
+
+    console.log("I run...");
+    console.log("...very fast");
+}
+
+run();
+
+{% endhighlight %}
+
+![JavaScript queue]({{ site.url }}/assets/img/js-queue.png)
+
+Det finns dock ingen garanti att blocken körs direkt efter varandra; andra block kan komma emellan.
+
+###Asynkron programmering
+
+![Asynchronous programming]({{ site.url }}/assets/img/asynchronous-programming.png)

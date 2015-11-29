@@ -258,7 +258,10 @@ a.post-link {
 
 .post-content {
     margin-bottom: $spacing-unit;
-
+    ol {
+        padding: 10px 0 10px 10px;
+        font-size: $small-font-size;
+    }
     h2 {
         font-size: 32px;
 

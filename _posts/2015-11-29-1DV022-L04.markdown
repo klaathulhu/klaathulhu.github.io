@@ -53,11 +53,66 @@ req.addEventListener("load", function(){
     console.log(req.responseText);
 });
 
+// behöver inte sätta "true" för att köra async
 req.open("GET", "data.json");
 
 // eftersom asynkront kommer send att returnera genast
 req.send();
 {% endhighlight %}
 ![Asynchronous request]({{ site.url }}/assets/img/async-request.png)
+
 Utifrån detta rimligt att tänka sig att "svaret" körs från eventListenern?
 
+###Callback pattern
+
+Callback körs när ett event händer
+
+{% highlight javascript %}
+// ajax.js
+// 1
+module.exports.request = function(config, callback) {
+    // 2
+    var req = new XMLHttpRequest();
+
+    // 3
+    req.addEventListener("load", function(){
+
+    // 4
+        if (req.status >= 400) {
+            callback(req.status);
+        }
+    // 5
+        callback(null, req.responseText);
+    });
+
+    // 7
+    req.open(config.method, config.url);
+    req.send(null);
+}
+
+// app.js
+var ajax = require("./ajax");
+
+// 6, 8
+ajax.request({method: "get", url: "data.json"}, function(error, response){
+
+// 9
+    if (error) {
+        throw new Error("Network error" + error);
+    }
+
+// 10
+    console.log(response);
+});
+{% endhighlight %}
+
+1. XMLHttpRequest, open och send är satt i en egen modul
+2. XMLHttpRequest skapas
+3. EventListener läggs till på "load"
+4. Om status >= 400 har något gått fel; callback anropas med req.status
+5. Om det inte går fel, anropas callback: callback(null, req.responseText)
+6. Metoden anropas med ett objekt (innehållande configinformation), som behandlas i 7
+7. config.method och config.url anropas med req.open
+8. callback: function(error, response).
+9. Om det gick fel, kasta ett fel
+10. Om det inte gick fel - logga resultatet

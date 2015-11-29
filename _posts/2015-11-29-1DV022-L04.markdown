@@ -116,3 +116,37 @@ ajax.request({method: "get", url: "data.json"}, function(error, response){
 8. callback: function(error, response).
 9. Om det gick fel, kasta ett fel
 10. Om det inte gick fel - logga resultatet
+
+
+###Web storage API
+Local storage: lagras lokalt länge
+Session storage: lagras under den aktuella sessionen
+
+{% highlight javascript %}
+function populateStorage(){
+    localStorage.setItem('bgcolor', document.getElementById(#id));
+    //... more
+    setStyles();
+}
+
+function setStyles(){
+    var currentColor = localStorage.getItem('bgcolor');
+}
+{% endhighlight %}
+
+##JSON in storage
+{% highlight javascript %}
+var style = {
+    bgcolor: document.getElementById('bgcolor').value,
+    font: document.getElementById('font').value,
+    image: document.getElementById('image').value
+}
+
+// tar ett js-objekt, gör om till JSON-objekt
+localStorage.setItem("style", JSON.stringify(style));
+
+// ...
+
+// hämtar style från localStorage och gör om till js-objekt igen
+JSON.parse(localStorage.getItem("style"));
+{% endhighlight %}
